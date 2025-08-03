@@ -10,34 +10,45 @@
         body {
             font-family: 'Inter', sans-serif;
         }
+        .sortable:hover {
+            cursor: pointer;
+            background-color: #4A5568; /* gray-700 */
+        }
+        .sort-asc::after {
+            content: ' ▲';
+            font-size: 0.8em;
+        }
+        .sort-desc::after {
+            content: ' ▼';
+            font-size: 0.8em;
+        }
     </style>
 </head>
 <body class="bg-gray-900 text-gray-300">
 
     <div class="container mx-auto px-4 py-8">
-        <header class="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
-            <div class="text-center sm:text-left">
-                <h1 class="text-3xl font-bold text-white">Quant's Bookshelf</h1>
-                <p class="text-md text-gray-400 mt-1">by Martin Tonikyan, PhD</p>
-            </div>
-            <div class="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 w-full sm:w-auto">
-                <input type="text" id="searchInput" placeholder="Search by title..." class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 w-full sm:w-64 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                <select id="categoryFilter" class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 w-full sm:w-auto focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="all">All Categories</option>
-                    <!-- Categories will be populated by JS -->
-                </select>
-            </div>
+        <header class="text-center mb-8">
+            <h1 class="text-3xl font-bold text-white">Quant's Bookshelf</h1>
+            <p class="text-md text-gray-400 mt-1">by Martin Tonikyan, PhD</p>
         </header>
+        
+        <div class="flex flex-col sm:flex-row justify-center items-center mb-8 gap-4">
+            <input type="text" id="searchInput" placeholder="Search by title or author..." class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 w-full max-w-xs focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <select id="categoryFilter" class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 w-full max-w-xs focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <option value="all">All Categories</option>
+                <!-- Categories will be populated by JS -->
+            </select>
+        </div>
 
         <div class="overflow-x-auto bg-gray-800 rounded-lg shadow">
             <table class="min-w-full">
                 <thead class="bg-gray-700">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Title</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Author</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider sortable" data-sort="title">Title</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider sortable" data-sort="author">Author</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Tags</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Category</th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Difficulty</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider sortable" data-sort="category">Category</th>
+                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider sortable" data-sort="difficulty">Difficulty</th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Cover</th>
                     </tr>
                 </thead>
@@ -50,26 +61,107 @@
 
     <script>
         const books = [
-            { title: "A Random Walk Down Wall Street", author: "Burton G. Malkiel", tags: ["Investing", "Personal Finance"], category: "Career", difficulty: "Introductory" },
-            { title: "Active Portfolio Management: A Quantitative Approach", author: "Grinold & Kahn", tags: ["Quantitative Investing"], category: "Quantitative Trading", difficulty: "Advanced" },
-            { title: "Advances in Financial Machine Learning", author: "Marcos Lopez de Prado", tags: ["Machine Learning", "Finance"], category: "Machine Learning", difficulty: "Advanced" },
-            { title: "An Introduction to High-Frequency Finance", author: "Derman, E. & Miller M.", tags: ["High-Frequency Trading"], category: "Quantitative Trading", difficulty: "Advanced" },
-            { title: "Convex Optimization", author: "Boyd & Vandenberghe", tags: ["Optimization", "Mathematics"], category: "Mathematics", difficulty: "Advanced" },
-            { title: "Deep Learning", author: "Goodfellow, Bengio, Courville", tags: ["Deep Learning", "AI"], category: "Machine Learning", difficulty: "Advanced" },
-            { title: "Effective C++", author: "Scott Meyers", tags: ["C++", "Programming"], category: "Programming", difficulty: "Intermediate" },
-            { title: "Financial Modeling Using C++", author: "Chirag D. Joshi", tags: ["C++", "Financial Modeling"], category: "Programming", difficulty: "Intermediate" },
-            { title: "Fooled by Randomness", author: "Nassim Nicholas Taleb", tags: ["Probability", "Philosophy"], category: "Career", difficulty: "Introductory" },
-            { title: "Heard on the Street", author: "Timothy Falcon Crack", tags: ["Interview Prep"], category: "Career", difficulty: "Introductory" },
-            { title: "Inside the Black Box", author: "Rishi K. Narang", tags: ["Quantitative Trading"], category: "Quantitative Trading", difficulty: "Intermediate" },
-            { title: "Interest Rate Models - Theory and Practice", author: "Brigo & Mercurio", tags: ["Interest Rate Derivatives"], category: "Quantitative Finance", difficulty: "Advanced" },
-            { title: "Liar's Poker", author: "Michael Lewis", tags: ["Wall Street", "Biography"], category: "Career", difficulty: "Introductory" },
-            { title: "Linear Algebra Done Right", author: "Sheldon Axler", tags: ["Linear Algebra", "Mathematics"], category: "Mathematics", difficulty: "Introductory" },
-            { title: "Monte Carlo Methods in Financial Engineering", author: "Paul Glasserman", tags: ["Monte Carlo", "Quantitative Finance"], category: "Quantitative Finance", difficulty: "Advanced" },
+            // Finance
+            { title: "Options, Futures, and Other Derivatives", author: "John Hull", tags: ["Derivatives", "Finance - General"], category: "Finance", difficulty: "Intermediate" },
+            { title: "Paul Wilmott Introduces Quantitative Finance", author: "Paul Wilmott", tags: ["Quantitative Trading", "Finance - General"], category: "Finance", difficulty: "Introductory" },
+            { title: "The Concepts and Practice of Mathematical Finance", author: "Mark Joshi", tags: ["Financial Mathematics", "Derivatives"], category: "Finance", difficulty: "Intermediate" },
+            { title: "Advanced Portfolio Management: A Quant's Guide", author: "Giuseppe A. Paleologo", tags: ["Portfolio Management", "Quantitative Trading"], category: "Finance", difficulty: "Advanced" },
+            { title: "Inside the Black Box", author: "Rishi K. Narang", tags: ["Quantitative Trading", "Market Microstructure"], category: "Finance", difficulty: "Intermediate" },
+            { title: "Quantitative Portfolio Management", author: "Michael Isichenko", tags: ["Portfolio Management", "Statistics"], category: "Finance", difficulty: "Advanced" },
+            { title: "Dynamic Hedging: Managing Vanilla and Exotic Options", author: "Nassim Nicholas Taleb", tags: ["Derivatives", "Volatility", "Hedging"], category: "Finance", difficulty: "Advanced" },
+            { title: "Advances in Financial Machine Learning", author: "Marcos López de Prado", tags: ["Machine Learning", "Portfolio Management"], category: "Statistics and Machine Learning", difficulty: "Advanced" },
+            { title: "Active Portfolio Management", author: "Grinold & Kahn", tags: ["Portfolio Management", "Asset Pricing"], category: "Finance", difficulty: "Advanced" },
+            { title: "Trades, Quotes and Prices: Financial Markets Under the Microscope", author: "Bouchaud, Bonart, Donier, Gould", tags: ["Market Microstructure", "Economics"], category: "Finance", difficulty: "Advanced" },
+            { title: "Interest Rate Modelling (Vols 1-3)", author: "Andersen & Piterberg", tags: ["Interest Rates", "Derivatives"], category: "Finance", difficulty: "Advanced" },
+            { title: "Pricing and Trading Interest Rate Derivatives", author: "J H M Darbyshire", tags: ["Interest Rates", "Derivatives"], category: "Finance", difficulty: "Advanced" },
+            { title: "Interest Rate Models - Theory and Practice", author: "Damiano Brigo, Fabrizio Mercurio", tags: ["Interest Rates", "Credit", "Inflation"], category: "Finance", difficulty: "Advanced" },
+            { title: "Efficient Methods For Valuing Interest Rate Derivatives", author: "Antoon Pelsser", tags: ["Interest Rates", "Derivatives"], category: "Finance", difficulty: "Advanced" },
+            { title: "Interest-Rate Option Models", author: "Riccardo Rebonato", tags: ["Interest Rates", "Derivatives", "Volatility"], category: "Finance", difficulty: "Advanced" },
+            { title: "Foreign Exchange Option Pricing for Practitioners", author: "Iain J. Clark", tags: ["FX", "Derivatives"], category: "Finance", difficulty: "Intermediate" },
+            { title: "FX Options and Smile Risk", author: "Antonio Castagna", tags: ["FX", "Volatility", "Derivatives"], category: "Finance", difficulty: "Advanced" },
+            { title: "FX Options and Structured Products", author: "Uwe Wystup", tags: ["FX", "Derivatives"], category: "Finance", difficulty: "Advanced" },
+            { title: "Option Volatility and Pricing", author: "Sheldon Natenberg", tags: ["Volatility", "Derivatives", "Equities"], category: "Finance", difficulty: "Intermediate" },
+            { title: "Stochastic Volatility Modelling", author: "Lorenzo Bergomi", tags: ["Volatility", "Stochastic Processes", "Equities"], category: "Finance", difficulty: "Advanced" },
+            { title: "Security Analysis: Principles and Technique", author: "Graham & Dodd", tags: ["Equities", "Fundamental Trading"], category: "Finance", difficulty: "Intermediate" },
+            { title: "Modelling Single-name and Multi-name Credit Derivatives", author: "Dominic O'Kane", tags: ["Credit", "Derivatives"], category: "Finance", difficulty: "Advanced" },
+            { title: "Credit Risk: Modeling, Valuation and Hedging", author: "Bielecki & Rutkowski", tags: ["Credit Risk", "Derivatives"], category: "Finance", difficulty: "Advanced" },
+            { title: "Commodity Option Pricing for Practitioners", author: "Iain J. Clark", tags: ["Commodities", "Derivatives"], category: "Finance", difficulty: "Intermediate" },
+            { title: "Commodities and Commodity Derivatives", author: "Hélyette Geman", tags: ["Commodities", "Derivatives"], category: "Finance", difficulty: "Advanced" },
+            { title: "Energy and Power Risk Management", author: "Eydeland & Wolyniec", tags: ["Commodities", "Risk Management"], category: "Finance", difficulty: "Advanced" },
+            { title: "The Handbook of Fixed Income Securities", author: "Frank J. Fabozzi", tags: ["Fixed Income", "Bonds"], category: "Finance", difficulty: "Intermediate" },
+            { title: "Bond Markets, Analysis, and Strategies", author: "Frank J. Fabozzi", tags: ["Fixed Income", "Bonds"], category: "Finance", difficulty: "Intermediate" },
+            { title: "Mortgage-Backed Securities", author: "Frank J. Fabozzi", tags: ["Credit", "Fixed Income"], category: "Finance", difficulty: "Advanced" },
+            { title: "Mortgage Valuation Models", author: "Davidson & Lewis", tags: ["Credit", "Fixed Income", "Valuation"], category: "Finance", difficulty: "Advanced" },
+            { title: "The xVA Challenge", author: "Jon Gregory", tags: ["Credit Risk", "Derivatives"], category: "Finance", difficulty: "Advanced" },
+            { title: "Modelling, Pricing, and Hedging Counterparty Credit Exposure", author: "Cesari et al.", tags: ["Credit Risk", "Derivatives"], category: "Finance", difficulty: "Advanced" },
+
+            // Mathematics
+            { title: "Introduction to Linear Algebra", author: "Gilbert Strang", tags: ["Linear Algebra"], category: "Mathematics", difficulty: "Introductory" },
+            { title: "Linear Algebra Done Right", author: "Sheldon Axler", tags: ["Linear Algebra"], category: "Mathematics", difficulty: "Introductory" },
+            { title: "A Course in Probability Theory", author: "Kai Lai Chung", tags: ["Probability", "Measure Theory"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "Probability with Martingales", author: "David Williams", tags: ["Probability", "Stochastic Processes"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "An Introduction to Probability Theory and Its Applications", author: "William Feller", tags: ["Probability"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "Probability and Random Processes", author: "Grimmett & Stirzaker", tags: ["Probability", "Stochastic Processes"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "Probability Theory: A Comprehensive Course", author: "Achim Klenke", tags: ["Probability", "Measure Theory"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "Probability and Measure", author: "Patrick Billingsley", tags: ["Probability", "Measure Theory"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "Probability Essentials", author: "Jean Jacod, Philip Protter", tags: ["Probability"], category: "Mathematics", difficulty: "Intermediate" },
+            { title: "Stochastic Calculus for Finance II: Continuous-Time Models", author: "Steven E. Shreve", tags: ["Stochastic Processes", "Financial Mathematics"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "Stochastic Calculus for Finance I: The Binomial Asset Pricing Model", author: "Steven E. Shreve", tags: ["Stochastic Processes", "Financial Mathematics"], category: "Mathematics", difficulty: "Intermediate" },
+            { title: "Arbitrage Theory in Continuous Time", author: "Tomas Björk", tags: ["Stochastic Processes", "Asset Pricing"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "Introduction To Stochastic Calculus With Applications", author: "Fima C. Klebaner", tags: ["Stochastic Processes"], category: "Mathematics", difficulty: "Intermediate" },
+            { title: "Brownian Motion and Stochastic Calculus", author: "Karatzas & Shreve", tags: ["Stochastic Processes"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "Martingale Methods in Financial Modelling", author: "Musiela & Rutkowski", tags: ["Stochastic Processes", "Financial Mathematics"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "Convex Optimization", author: "Boyd & Vandenberghe", tags: ["Optimization"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "Principles of Mathematical Analysis", author: "Walter Rudin", tags: ["Real Analysis"], category: "Mathematics", difficulty: "Advanced" },
+            { title: "Understanding Analysis", author: "Stephen Abbott", tags: ["Real Analysis"], category: "Mathematics", difficulty: "Introductory" },
+            { title: "Financial Calculus: An Introduction to Derivative Pricing", author: "Baxter & Rennie", tags: ["Financial Mathematics"], category: "Mathematics", difficulty: "Intermediate" },
+            { title: "Introduction to the Mathematics of Finance", author: "R. J. Williams", tags: ["Financial Mathematics"], category: "Mathematics", difficulty: "Introductory" },
+
+            // Statistics and Machine Learning
+            { title: "Statistical Inference", author: "Casella & Berger", tags: ["Statistics", "Probability"], category: "Statistics and Machine Learning", difficulty: "Intermediate" },
+            { title: "Introduction to Probability", author: "Tsitsiklis & Bertsekas", tags: ["Probability", "Statistics"], category: "Statistics and Machine Learning", difficulty: "Introductory" },
+            { title: "Introduction to Probability", author: "Blitzstein & Hwang", tags: ["Probability", "Statistics"], category: "Statistics and Machine Learning", difficulty: "Introductory" },
+            { title: "The Elements of Statistical Learning", author: "Hastie, Tibshirani & Friedman", tags: ["Machine Learning", "Statistics"], category: "Statistics and Machine Learning", difficulty: "Advanced" },
+            { title: "Mathematics for Machine Learning", author: "Deisenroth, Faisal, Ong", tags: ["Machine Learning", "Linear Algebra", "Optimization"], category: "Statistics and Machine Learning", difficulty: "Intermediate" },
+            { title: "Speech and Language Processing", author: "Jurafsky & Martin", tags: ["Machine Learning", "NLP"], category: "Statistics and Machine Learning", difficulty: "Advanced" },
+            { title: "Machine Learning in Finance: From Theory to Practice", author: "Dixon, Halperin, Bilokon", tags: ["Machine Learning", "Quantitative Trading"], category: "Statistics and Machine Learning", difficulty: "Advanced" },
+            { title: "Foundations of Reinforcement Learning with Applications in Finance", author: "Rao & Jelvis", tags: ["Reinforcement Learning", "Machine Learning"], category: "Statistics and Machine Learning", difficulty: "Advanced" },
+            { title: "Statistics and Data Analysis for Financial Engineering", author: "Ruppert & Matteson", tags: ["Statistics", "Data Analysis", "R"], category: "Statistics and Machine Learning", difficulty: "Intermediate" },
+            { title: "Market Models: A Guide to Financial Data Analysis", author: "Carol Alexander", tags: ["Statistics", "Data Analysis"], category: "Statistics and Machine Learning", difficulty: "Intermediate" },
+
+            // Programming
+            { title: "Monte Carlo Methods in Financial Engineering", author: "Paul Glasserman", tags: ["Simulations", "Financial Mathematics"], category: "Programming", difficulty: "Advanced" },
+            { title: "C++ Design Patterns and Derivatives Pricing", author: "Mark S. Joshi", tags: ["C++", "Derivatives", "Quant Dev"], category: "Programming", difficulty: "Advanced" },
+            { title: "Implementing Derivative Models", author: "Strickland & Clewlow", tags: ["C++", "Derivatives", "Quant Dev"], category: "Programming", difficulty: "Advanced" },
+            { title: "Effective C++", author: "Scott Meyers", tags: ["C++", "Quant Dev"], category: "Programming", difficulty: "Intermediate" },
+            { title: "Effective Modern C++", author: "Scott Meyers", tags: ["C++", "Quant Dev"], category: "Programming", difficulty: "Intermediate" },
+            { title: "The C++ Programming Language", author: "Bjarne Stroustrup", tags: ["C++"], category: "Programming", difficulty: "Intermediate" },
+            { title: "C++ Primer", author: "Lippman, Lajoie, Moo", tags: ["C++"], category: "Programming", difficulty: "Introductory" },
+
+            // Career
+            { title: "Heard on the Street: Quantitative Questions", author: "Timothy Falcon Crack", tags: ["Interview Prep"], category: "Career", difficulty: "Intermediate" },
+            { title: "Quant Job Interview Questions And Answers", author: "Joshi, Denson, Downes", tags: ["Interview Prep"], category: "Career", difficulty: "Intermediate" },
+            { title: "Quantitative Finance Interview Guide", author: "Canary Wharfian", tags: ["Interview Prep"], category: "Career", difficulty: "Intermediate" },
+            { title: "A Random Walk Down Wall Street", author: "Burton G. Malkiel", tags: ["Career", "Finance - General"], category: "Career", difficulty: "Introductory" },
+            { title: "Fooled by Randomness", author: "Nassim Nicholas Taleb", tags: ["Career", "Probability"], category: "Career", difficulty: "Introductory" },
+
+            // Industry - General
+            { title: "My Life as a Quant", author: "Emanuel Derman", tags: ["Biography", "Industry"], category: "Industry - General", difficulty: "Introductory" },
+            { title: "The Man Who Solved the Market", author: "Gregory Zuckerman", tags: ["Biography", "Industry"], category: "Industry - General", difficulty: "Introductory" },
+            { title: "Trading at the Speed of Light", author: "Donald MacKenzie", tags: ["Industry", "Market Microstructure"], category: "Industry - General", difficulty: "Introductory" },
+            { title: "The Quants", author: "Scott Patterson", tags: ["Industry", "History"], category: "Industry - General", difficulty: "Introductory" },
+            { title: "Liar's Poker", author: "Michael Lewis", tags: ["Industry", "Biography"], category: "Industry - General", difficulty: "Introductory" },
         ];
 
         const bookTableBody = document.getElementById('book-table-body');
         const searchInput = document.getElementById('searchInput');
         const categoryFilter = document.getElementById('categoryFilter');
+        const tableHeaders = document.querySelectorAll('th.sortable');
+
+        let sortState = {
+            column: 'title',
+            direction: 'asc'
+        };
 
         // Populate category filter
         const categories = [...new Set(books.map(book => book.category))];
@@ -82,11 +174,10 @@
 
         const fetchBookCover = async (title, author) => {
             try {
-                const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(title)}+inauthor:${encodeURIComponent(author)}`);
+                const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(title)}+inauthor:${encodeURIComponent(author.split(',')[0])}`);
                 const data = await response.json();
                 if (data.items && data.items.length > 0) {
-                    const book = data.items[0];
-                    return book.volumeInfo.imageLinks?.thumbnail || 'https://placehold.co/80x120/374151/9CA3AF?text=No+Cover';
+                    return data.items[0].volumeInfo.imageLinks?.thumbnail || 'https://placehold.co/80x120/374151/9CA3AF?text=No+Cover';
                 }
             } catch (error) {
                 console.error('Error fetching book cover:', error);
@@ -94,48 +185,90 @@
             return 'https://placehold.co/80x120/374151/9CA3AF?text=No+Cover';
         };
 
-        const renderBooks = async (filteredBooks) => {
-            bookTableBody.innerHTML = '<tr><td colspan="6" class="text-center py-8"><div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500 mx-auto"></div></td></tr>';
-            const rows = await Promise.all(filteredBooks.map(async book => {
+        const renderBooks = async (booksToRender) => {
+            bookTableBody.innerHTML = `<tr><td colspan="6" class="text-center py-8"><div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-blue-500 mx-auto"></div><p class="mt-2">Loading book covers...</p></td></tr>`;
+            
+            const rows = await Promise.all(booksToRender.map(async book => {
                 const coverUrl = await fetchBookCover(book.title, book.author);
                 const difficultyColor = book.difficulty === 'Advanced' ? 'text-red-400' : book.difficulty === 'Intermediate' ? 'text-yellow-400' : 'text-green-400';
                 return `
-                    <tr class="hover:bg-gray-700">
-                        <td class="px-6 py-4 whitespace-nowrap">
+                    <tr class="hover:bg-gray-700/50">
+                        <td class="px-6 py-4 align-top">
                             <div class="text-sm font-medium text-white">${book.title}</div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm">${book.author}</td>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            ${book.tags.map(tag => `<span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-600 text-gray-200">${tag}</span>`).join(' ')}
+                        <td class="px-6 py-4 align-top whitespace-nowrap text-sm">${book.author}</td>
+                        <td class="px-6 py-4 align-top">
+                            <div class="flex flex-wrap gap-1">
+                            ${book.tags.map(tag => `<span class="px-2 py-0.5 inline-flex text-xs leading-5 font-semibold rounded-full bg-gray-600 text-gray-200">${tag}</span>`).join(' ')}
+                            </div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm">${book.category}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm ${difficultyColor}">${book.difficulty}</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm">
-                            <img src="${coverUrl}" alt="Cover for ${book.title}" class="h-20 w-auto rounded-md" onerror="this.onerror=null;this.src='https://placehold.co/80x120/374151/9CA3AF?text=Error';">
+                        <td class="px-6 py-4 align-top whitespace-nowrap text-sm">${book.category}</td>
+                        <td class="px-6 py-4 align-top whitespace-nowrap text-sm font-medium ${difficultyColor}">${book.difficulty}</td>
+                        <td class="px-6 py-4 align-top text-sm">
+                            <img src="${coverUrl}" alt="Cover for ${book.title}" class="h-24 w-auto rounded-md shadow-lg" onerror="this.onerror=null;this.src='https://placehold.co/80x120/374151/9CA3AF?text=Error';">
                         </td>
                     </tr>
                 `;
             }));
             bookTableBody.innerHTML = rows.join('');
+            if (rows.length === 0) {
+                 bookTableBody.innerHTML = '<tr><td colspan="6" class="text-center py-8 text-gray-400">No books found matching your criteria.</td></tr>';
+            }
         };
 
-        const filterAndRender = () => {
+        const updateSortUI = () => {
+            tableHeaders.forEach(header => {
+                header.classList.remove('sort-asc', 'sort-desc');
+                if (header.dataset.sort === sortState.column) {
+                    header.classList.add(sortState.direction === 'asc' ? 'sort-asc' : 'sort-desc');
+                }
+            });
+        };
+
+        const filterAndSortAndRender = () => {
             const searchTerm = searchInput.value.toLowerCase();
             const selectedCategory = categoryFilter.value;
 
-            const filteredBooks = books.filter(book => {
+            // 1. Filter
+            let processedBooks = books.filter(book => {
                 const titleMatch = book.title.toLowerCase().includes(searchTerm);
+                const authorMatch = book.author.toLowerCase().includes(searchTerm);
                 const categoryMatch = selectedCategory === 'all' || book.category === selectedCategory;
-                return titleMatch && categoryMatch;
+                return (titleMatch || authorMatch) && categoryMatch;
             });
-            renderBooks(filteredBooks);
+
+            // 2. Sort
+            processedBooks.sort((a, b) => {
+                const valA = a[sortState.column].toLowerCase();
+                const valB = b[sortState.column].toLowerCase();
+                if (valA < valB) return sortState.direction === 'asc' ? -1 : 1;
+                if (valA > valB) return sortState.direction === 'asc' ? 1 : -1;
+                return 0;
+            });
+
+            // 3. Render
+            renderBooks(processedBooks);
+            updateSortUI();
         };
 
-        searchInput.addEventListener('input', filterAndRender);
-        categoryFilter.addEventListener('change', filterAndRender);
+        tableHeaders.forEach(header => {
+            header.addEventListener('click', () => {
+                const sortColumn = header.dataset.sort;
+                if (sortState.column === sortColumn) {
+                    sortState.direction = sortState.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                    sortState.column = sortColumn;
+                    sortState.direction = 'asc';
+                }
+                filterAndSortAndRender();
+            });
+        });
+
+        searchInput.addEventListener('input', filterAndSortAndRender);
+        categoryFilter.addEventListener('change', filterAndSortAndRender);
 
         // Initial render
-        renderBooks(books);
+        filterAndSortAndRender();
     </script>
 
 </body>
