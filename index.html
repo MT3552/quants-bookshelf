@@ -45,19 +45,24 @@
         </header>
         
         <div class="flex flex-col sm:flex-row justify-center items-center mb-8 gap-4">
+            <!-- Search Input -->
             <input type="text" id="searchInput" placeholder="Search by title or author..." class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 w-full max-w-xs focus:outline-none focus:ring-2 focus:ring-blue-500">
             
+            <!-- Category Filter -->
             <select id="categoryFilter" class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 w-full max-w-xs focus:outline-none focus:ring-2 focus:ring-blue-500">
                 <option value="all">All Categories</option>
-                </select>
+                <!-- Categories will be populated by JS -->
+            </select>
 
+            <!-- Tag Multi-Select Filter -->
             <div class="relative w-full max-w-xs">
                 <button id="tagFilterButton" class="bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 w-full text-left focus:outline-none focus:ring-2 focus:ring-blue-500 flex justify-between items-center">
                     <span id="tagFilterButtonText">All Tags</span>
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                 </button>
                 <div id="tagFilterDropdown" class="hidden absolute z-10 mt-1 w-full bg-gray-800 border border-gray-700 rounded-lg shadow-lg max-h-60 overflow-y-auto no-scrollbar">
-                    </div>
+                    <!-- Tags will be populated by JS -->
+                </div>
             </div>
         </div>
 
@@ -74,7 +79,8 @@
                     </tr>
                 </thead>
                 <tbody id="book-table-body" class="divide-y divide-gray-700">
-                    </tbody>
+                    <!-- Book rows will be inserted here by JS -->
+                </tbody>
             </table>
         </div>
     </div>
@@ -107,75 +113,75 @@
             { title: "FX Options and Structured Products", author: "Uwe Wystup", tags: ["FX", "Derivatives"], category: "Finance", difficulty: "Advanced", asin: "XXXXXXXXXX" },
             { title: "Option Volatility and Pricing", author: "Sheldon Natenberg", tags: ["Volatility", "Derivatives", "Equities"], category: "Finance", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
             { title: "Stochastic Volatility Modelling", author: "Lorenzo Bergomi", tags: ["Volatility", "Stochastic Processes", "Equities"], category: "Finance", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Security Analysis: Principles and Technique", author: "Graham & Dodd", tags: ["Equities", "Fundamental Trading"], category: "Finance", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "Modelling Single-name and Multi-name Credit Derivatives", author: "Dominic O'Kane", tags: ["Credit", "Derivatives"], category: "Finance", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Credit Risk: Modeling, Valuation and Hedging", author: "Bielecki & Rutkowski", tags: ["Credit Risk", "Derivatives"], category: "Finance", difficulty: "Advanced", asin: "XXXXXXXXXX" },
+            { title: "Security Analysis: Principles and Technique", author: "Graham & Dodd", tags: ["Equities", "Fundamental Trading"], category: "Finance", difficulty: "Intermediate", asin: "0071592539" },
+            { title: "Modelling Single-name and Multi-name Credit Derivatives", author: "Dominic O'Kane", tags: ["Credit", "Derivatives"], category: "Finance", difficulty: "Advanced", asin: "0470028233" },
+            { title: "Credit Risk: Modeling, Valuation and Hedging", author: "Bielecki & Rutkowski", tags: ["Credit Risk", "Derivatives"], category: "Finance", difficulty: "Advanced", asin: "354042240X" },
             { title: "Commodity Option Pricing for Practitioners", author: "Iain J. Clark", tags: ["Commodities", "Derivatives"], category: "Finance", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "Commodities and Commodity Derivatives", author: "Hélyette Geman", tags: ["Commodities", "Derivatives"], category: "Finance", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Energy and Power Risk Management", author: "Eydeland & Wolyniec", tags: ["Commodities", "Risk Management"], category: "Finance", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "The Handbook of Fixed Income Securities", author: "Frank J. Fabozzi", tags: ["Fixed Income", "Bonds"], category: "Finance", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "Bond Markets, Analysis, and Strategies", author: "Frank J. Fabozzi", tags: ["Fixed Income", "Bonds"], category: "Finance", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "Mortgage-Backed Securities", author: "Frank J. Fabozzi", tags: ["Credit", "Fixed Income"], category: "Finance", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Mortgage Valuation Models", author: "Davidson & Lewis", tags: ["Credit", "Fixed Income", "Valuation"], category: "Finance", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "The xVA Challenge", author: "Jon Gregory", tags: ["Credit Risk", "Derivatives"], category: "Finance", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Modelling, Pricing, and Hedging Counterparty Credit Exposure", author: "Cesari et al.", tags: ["Credit Risk", "Derivatives"], category: "Finance", difficulty: "Advanced", asin: "XXXXXXXXXX" },
+            { title: "Commodities and Commodity Derivatives", author: "Hélyette Geman", tags: ["Commodities", "Derivatives"], category: "Finance", difficulty: "Advanced", asin: "0470027296" },
+            { title: "Energy and Power Risk Management", author: "Eydeland & Wolyniec", tags: ["Commodities", "Risk Management"], category: "Finance", difficulty: "Advanced", asin: "0471104396" },
+            { title: "The Handbook of Fixed Income Securities", author: "Frank J. Fabozzi", tags: ["Fixed Income", "Bonds"], category: "Finance", difficulty: "Intermediate", asin: "0071768367" },
+            { title: "Bond Markets, Analysis, and Strategies", author: "Frank J. Fabozzi", tags: ["Fixed Income", "Bonds"], category: "Finance", difficulty: "Intermediate", asin: "0134895439" },
+            { title: "Mortgage-Backed Securities", author: "Frank J. Fabozzi", tags: ["Credit", "Fixed Income"], category: "Finance", difficulty: "Advanced", asin: "047004364X" },
+            { title: "Mortgage Valuation Models", author: "Davidson & Lewis", tags: ["Credit", "Fixed Income", "Valuation"], category: "Finance", difficulty: "Advanced", asin: "019534211X" },
+            { title: "The xVA Challenge", author: "Jon Gregory", tags: ["Credit Risk", "Derivatives"], category: "Finance", difficulty: "Advanced", asin: "111950897X" },
+            { title: "Modelling, Pricing, and Hedging Counterparty Credit Exposure", author: "Cesari et al.", tags: ["Credit Risk", "Derivatives"], category: "Finance", difficulty: "Advanced", asin: "364204453X" },
 
             // Mathematics
-            { title: "Introduction to Linear Algebra", author: "Gilbert Strang", tags: ["Linear Algebra"], category: "Mathematics", difficulty: "Introductory", asin: "XXXXXXXXXX" },
-            { title: "Linear Algebra Done Right", author: "Sheldon Axler", tags: ["Linear Algebra"], category: "Mathematics", difficulty: "Introductory", asin: "XXXXXXXXXX" },
-            { title: "A Course in Probability Theory", author: "Kai Lai Chung", tags: ["Probability", "Measure Theory"], category: "Mathematics", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Probability with Martingales", author: "David Williams", tags: ["Probability", "Stochastic Processes"], category: "Mathematics", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "An Introduction to Probability Theory and Its Applications", author: "William Feller", tags: ["Probability"], category: "Mathematics", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Probability and Random Processes", author: "Grimmett & Stirzaker", tags: ["Probability", "Stochastic Processes"], category: "Mathematics", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Probability Theory: A Comprehensive Course", author: "Achim Klenke", tags: ["Probability", "Measure Theory"], category: "Mathematics", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Probability and Measure", author: "Patrick Billingsley", tags: ["Probability", "Measure Theory"], category: "Mathematics", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Probability Essentials", author: "Jean Jacod, Philip Protter", tags: ["Probability"], category: "Mathematics", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
+            { title: "Introduction to Linear Algebra", author: "Gilbert Strang", tags: ["Linear Algebra"], category: "Mathematics", difficulty: "Introductory", asin: "0980232775" },
+            { title: "Linear Algebra Done Right", author: "Sheldon Axler", tags: ["Linear Algebra"], category: "Mathematics", difficulty: "Introductory", asin: "3319110799" },
+            { title: "A Course in Probability Theory", author: "Kai Lai Chung", tags: ["Probability", "Measure Theory"], category: "Mathematics", difficulty: "Advanced", asin: "0121741516" },
+            { title: "Probability with Martingales", author: "David Williams", tags: ["Probability", "Stochastic Processes"], category: "Mathematics", difficulty: "Advanced", asin: "0521406056" },
+            { title: "An Introduction to Probability Theory and Its Applications", author: "William Feller", tags: ["Probability"], category: "Mathematics", difficulty: "Advanced", asin: "0471257087" },
+            { title: "Probability and Random Processes", author: "Grimmett & Stirzaker", tags: ["Probability", "Stochastic Processes"], category: "Mathematics", difficulty: "Advanced", asin: "0198572220" },
+            { title: "Probability Theory: A Comprehensive Course", author: "Achim Klenke", tags: ["Probability", "Measure Theory"], category: "Mathematics", difficulty: "Advanced", asin: "1447153602" },
+            { title: "Probability and Measure", author: "Patrick Billingsley", tags: ["Probability", "Measure Theory"], category: "Mathematics", difficulty: "Advanced", asin: "1118122372" },
+            { title: "Probability Essentials", author: "Jean Jacod, Philip Protter", tags: ["Probability"], category: "Mathematics", difficulty: "Intermediate", asin: "3540438718" },
             { title: "Stochastic Calculus for Finance II: Continuous-Time Models", author: "Steven E. Shreve", tags: ["Stochastic Processes", "Financial Mathematics"], category: "Mathematics", difficulty: "Advanced", asin: "0387401016" },
-            { title: "Stochastic Calculus for Finance I: The Binomial Asset Pricing Model", author: "Steven E. Shreve", tags: ["Stochastic Processes", "Financial Mathematics"], category: "Mathematics", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "Arbitrage Theory in Continuous Time", author: "Tomas Björk", tags: ["Stochastic Processes", "Asset Pricing"], category: "Mathematics", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Introduction To Stochastic Calculus With Applications", author: "Fima C. Klebaner", tags: ["Stochastic Processes"], category: "Mathematics", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "Brownian Motion and Stochastic Calculus", author: "Karatzas & Shreve", tags: ["Stochastic Processes"], category: "Mathematics", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Martingale Methods in Financial Modelling", author: "Musiela & Rutkowski", tags: ["Stochastic Processes", "Financial Mathematics"], category: "Mathematics", difficulty: "Advanced", asin: "XXXXXXXXXX" },
+            { title: "Stochastic Calculus for Finance I: The Binomial Asset Pricing Model", author: "Steven E. Shreve", tags: ["Stochastic Processes", "Financial Mathematics"], category: "Mathematics", difficulty: "Intermediate", asin: "0387249680" },
+            { title: "Arbitrage Theory in Continuous Time", author: "Tomas Björk", tags: ["Stochastic Processes", "Asset Pricing"], category: "Mathematics", difficulty: "Advanced", asin: "019957474X" },
+            { title: "Introduction To Stochastic Calculus With Applications", author: "Fima C. Klebaner", tags: ["Stochastic Processes"], category: "Mathematics", difficulty: "Intermediate", asin: "1860945551" },
+            { title: "Brownian Motion and Stochastic Calculus", author: "Karatzas & Shreve", tags: ["Stochastic Processes"], category: "Mathematics", difficulty: "Advanced", asin: "0387976558" },
+            { title: "Martingale Methods in Financial Modelling", author: "Musiela & Rutkowski", tags: ["Stochastic Processes", "Financial Mathematics"], category: "Mathematics", difficulty: "Advanced", asin: "354020912X" },
             { title: "Convex Optimization", author: "Boyd & Vandenberghe", tags: ["Optimization"], category: "Mathematics", difficulty: "Advanced", asin: "0521833787" },
-            { title: "Principles of Mathematical Analysis", author: "Walter Rudin", tags: ["Real Analysis"], category: "Mathematics", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Understanding Analysis", author: "Stephen Abbott", tags: ["Real Analysis"], category: "Mathematics", difficulty: "Introductory", asin: "XXXXXXXXXX" },
-            { title: "Financial Calculus: An Introduction to Derivative Pricing", author: "Baxter & Rennie", tags: ["Financial Mathematics"], category: "Mathematics", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "Introduction to the Mathematics of Finance", author: "R. J. Williams", tags: ["Financial Mathematics"], category: "Mathematics", difficulty: "Introductory", asin: "XXXXXXXXXX" },
+            { title: "Principles of Mathematical Analysis", author: "Walter Rudin", tags: ["Real Analysis"], category: "Mathematics", difficulty: "Advanced", asin: "007054235X" },
+            { title: "Understanding Analysis", author: "Stephen Abbott", tags: ["Real Analysis"], category: "Mathematics", difficulty: "Introductory", asin: "1493927116" },
+            { title: "Financial Calculus: An Introduction to Derivative Pricing", author: "Baxter & Rennie", tags: ["Financial Mathematics"], category: "Mathematics", difficulty: "Intermediate", asin: "0521552893" },
+            { title: "Introduction to the Mathematics of Finance", author: "R. J. Williams", tags: ["Financial Mathematics"], category: "Mathematics", difficulty: "Introductory", asin: "0821839038" },
 
             // Statistics and Machine Learning
-            { title: "Statistical Inference", author: "Casella & Berger", tags: ["Statistics", "Probability"], category: "Statistics and Machine Learning", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "Introduction to Probability", author: "Tsitsiklis & Bertsekas", tags: ["Probability", "Statistics"], category: "Statistics and Machine Learning", difficulty: "Introductory", asin: "XXXXXXXXXX" },
-            { title: "Introduction to Probability", author: "Blitzstein & Hwang", tags: ["Probability", "Statistics"], category: "Statistics and Machine Learning", difficulty: "Introductory", asin: "XXXXXXXXXX" },
+            { title: "Statistical Inference", author: "Casella & Berger", tags: ["Statistics", "Probability"], category: "Statistics and Machine Learning", difficulty: "Intermediate", asin: "0534243126" },
+            { title: "Introduction to Probability", author: "Tsitsiklis & Bertsekas", tags: ["Probability", "Statistics"], category: "Statistics and Machine Learning", difficulty: "Introductory", asin: "188652940X" },
+            { title: "Introduction to Probability", author: "Blitzstein & Hwang", tags: ["Probability", "Statistics"], category: "Statistics and Machine Learning", difficulty: "Introductory", asin: "1138369918" },
             { title: "The Elements of Statistical Learning", author: "Hastie, Tibshirani & Friedman", tags: ["Machine Learning", "Statistics"], category: "Statistics and Machine Learning", difficulty: "Advanced", asin: "0387848576" },
             { title: "Advances in Financial Machine Learning", author: "Marcos López de Prado", tags: ["Machine Learning", "Portfolio Management"], category: "Statistics and Machine Learning", difficulty: "Advanced", asin: "1119482089" },
-            { title: "Mathematics for Machine Learning", author: "Deisenroth, Faisal, Ong", tags: ["Machine Learning", "Linear Algebra", "Optimization"], category: "Statistics and Machine Learning", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "Speech and Language Processing", author: "Jurafsky & Martin", tags: ["Machine Learning", "NLP"], category: "Statistics and Machine Learning", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Machine Learning in Finance: From Theory to Practice", author: "Dixon, Halperin, Bilokon", tags: ["Machine Learning", "Quantitative Trading"], category: "Statistics and Machine Learning", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Foundations of Reinforcement Learning with Applications in Finance", author: "Rao & Jelvis", tags: ["Reinforcement Learning", "Machine Learning"], category: "Statistics and Machine Learning", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Statistics and Data Analysis for Financial Engineering", author: "Ruppert & Matteson", tags: ["Statistics", "Data Analysis", "R"], category: "Statistics and Machine Learning", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "Market Models: A Guide to Financial Data Analysis", author: "Carol Alexander", tags: ["Statistics", "Data Analysis"], category: "Statistics and Machine Learning", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
+            { title: "Mathematics for Machine Learning", author: "Deisenroth, Faisal, Ong", tags: ["Machine Learning", "Linear Algebra", "Optimization"], category: "Statistics and Machine Learning", difficulty: "Intermediate", asin: "110845514X" },
+            { title: "Speech and Language Processing", author: "Jurafsky & Martin", tags: ["Machine Learning", "NLP"], category: "Statistics and Machine Learning", difficulty: "Advanced", asin: "0131873210" },
+            { title: "Machine Learning in Finance: From Theory to Practice", author: "Dixon, Halperin, Bilokon", tags: ["Machine Learning", "Quantitative Trading"], category: "Statistics and Machine Learning", difficulty: "Advanced", asin: "3030410676" },
+            { title: "Foundations of Reinforcement Learning with Applications in Finance", author: "Rao & Jelvis", tags: ["Reinforcement Learning", "Machine Learning"], category: "Statistics and Machine Learning", difficulty: "Advanced", asin: "B0BB8KSHTK" },
+            { title: "Statistics and Data Analysis for Financial Engineering", author: "Ruppert & Matteson", tags: ["Statistics", "Data Analysis", "R"], category: "Statistics and Machine Learning", difficulty: "Intermediate", asin: "1493926136" },
+            { title: "Market Models: A Guide to Financial Data Analysis", author: "Carol Alexander", tags: ["Statistics", "Data Analysis"], category: "Statistics and Machine Learning", difficulty: "Intermediate", asin: "0471899755" },
 
             // Programming
-            { title: "Monte Carlo Methods in Financial Engineering", author: "Paul Glasserman", tags: ["Simulations", "Financial Mathematics"], category: "Programming", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "C++ Design Patterns and Derivatives Pricing", author: "Mark S. Joshi", tags: ["C++", "Derivatives", "Quant Dev"], category: "Programming", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Implementing Derivative Models", author: "Strickland & Clewlow", tags: ["C++", "Derivatives", "Quant Dev"], category: "Programming", difficulty: "Advanced", asin: "XXXXXXXXXX" },
-            { title: "Effective C++", author: "Scott Meyers", tags: ["C++", "Quant Dev"], category: "Programming", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "Effective Modern C++", author: "Scott Meyers", tags: ["C++", "Quant Dev"], category: "Programming", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "The C++ Programming Language", author: "Bjarne Stroustrup", tags: ["C++"], category: "Programming", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
+            { title: "Monte Carlo Methods in Financial Engineering", author: "Paul Glasserman", tags: ["Simulations", "Financial Mathematics"], category: "Programming", difficulty: "Advanced", asin: "0387004513" },
+            { title: "C++ Design Patterns and Derivatives Pricing", author: "Mark S. Joshi", tags: ["C++", "Derivatives", "Quant Dev"], category: "Programming", difficulty: "Advanced", asin: "0521864828" },
+            { title: "Implementing Derivative Models", author: "Strickland & Clewlow", tags: ["C++", "Derivatives", "Quant Dev"], category: "Programming", difficulty: "Advanced", asin: "0471966517" },
+            { title: "Effective C++", author: "Scott Meyers", tags: ["C++", "Quant Dev"], category: "Programming", difficulty: "Intermediate", asin: "0321334876" },
+            { title: "Effective Modern C++", author: "Scott Meyers", tags: ["C++", "Quant Dev"], category: "Programming", difficulty: "Intermediate", asin: "1491903996" },
+            { title: "The C++ Programming Language", author: "Bjarne Stroustrup", tags: ["C++"], category: "Programming", difficulty: "Intermediate", asin: "0321563840" },
             { title: "C++ Primer", author: "Lippman, Lajoie, Moo", tags: ["C++"], category: "Programming", difficulty: "Introductory", asin: "0321714113" },
 
             // Career
             { title: "Heard on the Street: Quantitative Questions", author: "Timothy Falcon Crack", tags: ["Interview Prep"], category: "Career", difficulty: "Intermediate", asin: "097005525X" },
-            { title: "Quant Job Interview Questions And Answers", author: "Joshi, Denson, Downes", tags: ["Interview Prep"], category: "Career", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
+            { title: "Quant Job Interview Questions And Answers", author: "Joshi, Denson, Downes", tags: ["Interview Prep"], category: "Career", difficulty: "Intermediate", asin: "0987122827" },
             { title: "Quantitative Finance Interview Guide", author: "Canary Wharfian", tags: ["Interview Prep"], category: "Career", difficulty: "Intermediate", asin: "XXXXXXXXXX" },
-            { title: "A Random Walk Down Wall Street", author: "Burton G. Malkiel", tags: ["Career", "Finance - General"], category: "Career", difficulty: "Introductory", asin: "XXXXXXXXXX" },
-            { title: "Fooled by Randomness", author: "Nassim Nicholas Taleb", tags: ["Career", "Probability"], category: "Career", difficulty: "Introductory", asin: "XXXXXXXXXX" },
+            { title: "A Random Walk Down Wall Street", author: "Burton G. Malkiel", tags: ["Career", "Finance - General"], category: "Career", difficulty: "Introductory", asin: "1324051144" },
+            { title: "Fooled by Randomness", author: "Nassim Nicholas Taleb", tags: ["Career", "Probability"], category: "Career", difficulty: "Introductory", asin: "0812975219" },
 
             // Industry - General
             { title: "My Life as a Quant", author: "Emanuel Derman", tags: ["Biography", "Industry"], category: "Industry - General", difficulty: "Introductory", asin: "0471394203" },
             { title: "The Man Who Solved the Market", author: "Gregory Zuckerman", tags: ["Biography", "Industry"], category: "Industry - General", difficulty: "Introductory", asin: "0735217980" },
-            { title: "Trading at the Speed of Light", author: "Donald MacKenzie", tags: ["Industry", "Market Microstructure"], category: "Industry - General", difficulty: "Introductory", asin: "XXXXXXXXXX" },
-            { title: "The Quants", author: "Scott Patterson", tags: ["Industry", "History"], category: "Industry - General", difficulty: "Introductory", asin: "XXXXXXXXXX" },
+            { title: "Trading at the Speed of Light", author: "Donald MacKenzie", tags: ["Industry", "Market Microstructure"], category: "Industry - General", difficulty: "Introductory", asin: "069121113X" },
+            { title: "The Quants", author: "Scott Patterson", tags: ["Industry", "History"], category: "Industry - General", difficulty: "Introductory", asin: "0307453375" },
             { title: "Liar's Poker", author: "Michael Lewis", tags: ["Industry", "Biography"], category: "Industry - General", difficulty: "Introductory", asin: "039333869X" },
         ];
 
